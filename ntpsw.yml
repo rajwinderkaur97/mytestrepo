@@ -1,0 +1,12 @@
+
+---
+- hosts: all
+  remote_user: root
+  become: yes
+  tasks:
+    - name: Installing ntp packet
+      yum: name=ntp state=present
+    - name: Copying the files
+      copy: src="/var/tmp/myfile" dest="/etc/ntpd.conf/"
+    - name: Starting the service
+      service: name=ntpd state=started enabled=yes
